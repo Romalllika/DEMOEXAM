@@ -2,9 +2,9 @@
 
 try{
     $host = 'localhost';
-    $db = 'drive_rf222';
+    $db = 'drive_rf';
     $user = 'root';
-    $pass = 'mysql';
+    $pass = '';
     $charset = 'utf8mb4';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
