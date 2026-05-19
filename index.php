@@ -25,6 +25,23 @@ function h($value) {
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
+    <style>
+        .slider-box {
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+        }
+        .slider {
+            width: 10000px;
+            height: 300px;
+        }
+        img {
+            width: 400px;
+            height: 300px;
+            float: left;
+        }
+        *{margin: 0; padding: 0;}
+    </style>
 <header>
     <a href="index.php">Главная</a>
     <?php if (isset($_SESSION['user_id'], $_SESSION['role'])): ?>
@@ -41,7 +58,19 @@ function h($value) {
 </header>
 <main>
     <h1>Запись на обучение вождению речного транспорта</h1>
+    <div class="slider-box">
+        <div class="slider">
+            <img src="img/im5.jpg" alt="5">
+            
+            <img src="img/im1.jpg" alt="1">
+            <img src="img/im2.jpg" alt="2">
+            <img src="img/im3.jpg" alt="3">
+            <img src="img/im4.jpg" alt="4">
+            <img src="img/im5.jpg" alt="5">
 
+            <img src="img/im1.jpg" alt="1">
+        </div>
+    </div>
     <form action="server/add_bid.php" method="POST">
         <label for="machine">Выберите транспорт:</label><br>
         <select name="machine" id="machine" required>
