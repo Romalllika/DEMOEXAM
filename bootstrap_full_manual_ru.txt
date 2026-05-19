@@ -1,0 +1,1732 @@
+BOOTSTRAP 5.3 — ПОЛНАЯ ПРАКТИЧЕСКАЯ ШПАРГАЛКА ПО КЛАССАМ
+Версия: Bootstrap 5.3.x
+Язык: русский, объяснение для новичка
+
+ВАЖНО
+Bootstrap — это не “все CSS-свойства мира”.
+Bootstrap даёт готовые CSS-классы. Ты пишешь их в class="", а Bootstrap уже применяет CSS.
+
+Пример:
+<input class="form-control">
+
+Ты не пишешь:
+input { ... }
+
+Ты пишешь готовый класс:
+form-control
+
+====================================================================
+0. КАК ЧИТАТЬ BOOTSTRAP-КЛАССЫ
+====================================================================
+
+Главная схема:
+
+1) Простые классы:
+btn
+card
+container
+row
+col
+
+2) Классы “база + вариант”:
+btn btn-primary
+alert alert-danger
+badge bg-success
+
+Читается:
+btn            = это кнопка
+btn-primary    = вариант кнопки, основной цвет
+
+3) Классы “сокращение + направление + размер”:
+mt-3
+px-4
+mb-2
+
+Читается:
+m = margin = внешний отступ
+p = padding = внутренний отступ
+t = top = сверху
+b = bottom = снизу
+x = left + right
+y = top + bottom
+3 / 4 / 2 = размер
+
+4) Адаптивные классы:
+mt-md-5
+col-lg-4
+d-none d-md-block
+
+Читается:
+md / lg / sm / xl / xxl = с какого размера экрана применять.
+
+Например:
+mt-md-5 = margin-top 5 начиная с md-экрана и больше.
+
+====================================================================
+1. BREAKPOINTS — РАЗМЕРЫ ЭКРАНА
+====================================================================
+
+Bootstrap работает mobile-first:
+сначала стиль применяется к маленьким экранам,
+а классы с sm/md/lg/xl/xxl включаются начиная с указанной ширины.
+
+Без приставки:
+mt-3 = на всех экранах
+
+С приставкой:
+mt-md-3 = только начиная с md и больше
+
+Стандартные breakpoint:
+
+sm  = от 576px
+md  = от 768px
+lg  = от 992px
+xl  = от 1200px
+xxl = от 1400px
+
+Примеры:
+col-12 col-md-6 col-lg-4
+
+Читается:
+на телефоне 12/12 ширины,
+на md — 6/12,
+на lg — 4/12.
+
+====================================================================
+2. SPACING — ОТСТУПЫ: MARGIN / PADDING / GAP
+====================================================================
+
+Свойства:
+m = margin = внешний отступ
+p = padding = внутренний отступ
+
+Направления:
+t = top = сверху
+b = bottom = снизу
+s = start = слева в LTR-языках
+e = end = справа в LTR-языках
+x = left + right
+y = top + bottom
+без буквы = все стороны
+
+Размеры по умолчанию:
+0    = 0
+1    = 0.25rem = примерно 4px
+2    = 0.5rem  = примерно 8px
+3    = 1rem    = примерно 16px
+4    = 1.5rem  = примерно 24px
+5    = 3rem    = примерно 48px
+auto = автоматически, только для margin
+
+Margin:
+m-0 m-1 m-2 m-3 m-4 m-5
+mt-0 ... mt-5
+mb-0 ... mb-5
+ms-0 ... ms-5
+me-0 ... me-5
+mx-0 ... mx-5 mx-auto
+my-0 ... my-5 my-auto
+m-auto
+mt-auto mb-auto ms-auto me-auto
+
+Padding:
+p-0 p-1 p-2 p-3 p-4 p-5
+pt-0 ... pt-5
+pb-0 ... pb-5
+ps-0 ... ps-5
+pe-0 ... pe-5
+px-0 ... px-5
+py-0 ... py-5
+
+Адаптивные:
+mt-sm-3
+mt-md-3
+mt-lg-3
+mt-xl-3
+mt-xxl-3
+
+Пример:
+<div class="p-3 mt-5 mb-4">
+
+Читается:
+внутренний отступ 3,
+отступ сверху 5,
+отступ снизу 4.
+
+Отрицательные margin:
+Если в Bootstrap включены negative margins, доступны:
+m-n1 m-n2 m-n3 m-n4 m-n5
+mt-n1 ... mt-n5
+mb-n1 ... mb-n5
+ms-n1 ... ms-n5
+me-n1 ... me-n5
+mx-n1 ... mx-n5
+my-n1 ... my-n5
+
+Обычно новичку лучше не использовать отрицательные отступы без причины.
+
+Gap:
+gap-0 ... gap-5
+row-gap-0 ... row-gap-5
+column-gap-0 ... column-gap-5
+
+Адаптивно:
+gap-md-3
+row-gap-lg-4
+column-gap-sm-2
+
+Пример:
+<div class="d-flex gap-3">
+
+====================================================================
+3. DISPLAY — КАК ЭЛЕМЕНТ ПОКАЗЫВАЕТСЯ
+====================================================================
+
+Формат:
+d-{value}
+
+Значения:
+d-none          = скрыть, display: none
+d-inline        = строчный элемент
+d-inline-block  = строчно-блочный
+d-block         = блочный
+d-grid          = grid
+d-inline-grid   = inline-grid
+d-table         = table
+d-table-row     = table-row
+d-table-cell    = table-cell
+d-flex          = flex
+d-inline-flex   = inline-flex
+
+Адаптивно:
+d-sm-none
+d-md-block
+d-lg-flex
+d-xl-grid
+d-xxl-inline-block
+
+Частый пример:
+<div class="d-none d-md-block">
+
+Читается:
+на телефоне скрыто,
+начиная с md показывается как block.
+
+Print:
+d-print-none
+d-print-block
+d-print-inline
+d-print-inline-block
+d-print-flex
+d-print-grid
+d-print-table
+d-print-table-row
+d-print-table-cell
+
+====================================================================
+4. FLEX — ВЫРАВНИВАНИЕ ЭЛЕМЕНТОВ
+====================================================================
+
+Сначала надо включить flex:
+d-flex
+d-inline-flex
+
+Направление:
+flex-row
+flex-row-reverse
+flex-column
+flex-column-reverse
+
+Адаптивно:
+flex-md-row
+flex-lg-column
+
+Перенос:
+flex-nowrap
+flex-wrap
+flex-wrap-reverse
+
+Выравнивание по главной оси:
+justify-content-start
+justify-content-end
+justify-content-center
+justify-content-between
+justify-content-around
+justify-content-evenly
+
+Выравнивание по поперечной оси:
+align-items-start
+align-items-end
+align-items-center
+align-items-baseline
+align-items-stretch
+
+Выравнивание строк при переносе:
+align-content-start
+align-content-end
+align-content-center
+align-content-between
+align-content-around
+align-content-stretch
+
+Выравнивание отдельного элемента:
+align-self-auto
+align-self-start
+align-self-end
+align-self-center
+align-self-baseline
+align-self-stretch
+
+Рост/сжатие:
+flex-fill
+flex-grow-0
+flex-grow-1
+flex-shrink-0
+flex-shrink-1
+
+Порядок:
+order-first
+order-0
+order-1
+order-2
+order-3
+order-4
+order-5
+order-last
+
+Пример:
+<div class="d-flex justify-content-center align-items-center gap-3">
+
+Читается:
+flex-контейнер,
+элементы по центру горизонтально,
+элементы по центру вертикально,
+расстояние между ними 3.
+
+====================================================================
+5. GRID — СЕТКА 12 КОЛОНОК
+====================================================================
+
+Главные классы:
+container
+container-fluid
+container-sm
+container-md
+container-lg
+container-xl
+container-xxl
+
+row
+col
+col-auto
+
+Колонки:
+col-1
+col-2
+col-3
+col-4
+col-5
+col-6
+col-7
+col-8
+col-9
+col-10
+col-11
+col-12
+
+Адаптивные:
+col-sm-1 ... col-sm-12
+col-md-1 ... col-md-12
+col-lg-1 ... col-lg-12
+col-xl-1 ... col-xl-12
+col-xxl-1 ... col-xxl-12
+
+Автоширина:
+col-auto
+col-sm-auto
+col-md-auto
+col-lg-auto
+col-xl-auto
+col-xxl-auto
+
+Количество колонок в строке:
+row-cols-1
+row-cols-2
+row-cols-3
+row-cols-4
+row-cols-5
+row-cols-6
+row-cols-auto
+
+Адаптивно:
+row-cols-md-3
+row-cols-lg-4
+
+Gutters — расстояние между колонками:
+g-0 ... g-5
+gx-0 ... gx-5
+gy-0 ... gy-5
+
+Адаптивно:
+g-md-3
+gx-lg-4
+gy-sm-2
+
+Смещение:
+offset-0 ... offset-11
+offset-sm-0 ... offset-sm-11
+offset-md-0 ... offset-md-11
+offset-lg-0 ... offset-lg-11
+offset-xl-0 ... offset-xl-11
+offset-xxl-0 ... offset-xxl-11
+
+Пример:
+<div class="container">
+  <div class="row g-3">
+    <div class="col-12 col-md-6 col-lg-4">...</div>
+  </div>
+</div>
+
+Читается:
+контейнер,
+строка с расстоянием 3,
+на телефоне блок занимает всю ширину,
+на md половину,
+на lg треть.
+
+====================================================================
+6. CSS GRID UTILITIES
+====================================================================
+
+Для CSS Grid:
+d-grid
+gap-0 ... gap-5
+
+Пример:
+<div class="d-grid gap-2">
+  <button class="btn btn-primary">Кнопка</button>
+  <button class="btn btn-secondary">Кнопка</button>
+</div>
+
+Кнопки станут друг под другом на всю ширину контейнера.
+
+====================================================================
+7. TEXT — ТЕКСТ
+====================================================================
+
+Выравнивание:
+text-start
+text-center
+text-end
+
+Адаптивно:
+text-sm-start
+text-md-center
+text-lg-end
+
+Перенос:
+text-wrap
+text-nowrap
+
+Обрезание длинного текста:
+text-truncate
+Важно: для text-truncate обычно нужен block/inline-block и ограниченная ширина.
+
+Разрыв слов:
+text-break
+
+Регистр:
+text-lowercase
+text-uppercase
+text-capitalize
+
+Размер шрифта:
+fs-1 = самый большой
+fs-2
+fs-3
+fs-4
+fs-5
+fs-6 = самый маленький из fs-классов
+
+Жирность:
+fw-bold
+fw-bolder
+fw-semibold
+fw-medium
+fw-normal
+fw-light
+fw-lighter
+
+Курсив:
+fst-italic
+fst-normal
+
+Line-height:
+lh-1
+lh-sm
+lh-base
+lh-lg
+
+Моноширинный шрифт:
+font-monospace
+
+Сброс цвета ссылки:
+text-reset
+
+Декорация:
+text-decoration-none
+text-decoration-underline
+text-decoration-line-through
+
+Мелкий текст:
+small
+или тег:
+<small>...</small>
+
+Пример:
+<p class="text-center fw-bold fs-4 text-uppercase">
+
+====================================================================
+8. COLORS — ЦВЕТ ТЕКСТА
+====================================================================
+
+Цвет текста:
+text-primary
+text-primary-emphasis
+text-secondary
+text-secondary-emphasis
+text-success
+text-success-emphasis
+text-danger
+text-danger-emphasis
+text-warning
+text-warning-emphasis
+text-info
+text-info-emphasis
+text-light
+text-light-emphasis
+text-dark
+text-dark-emphasis
+text-body
+text-body-emphasis
+text-body-secondary
+text-body-tertiary
+text-black
+text-white
+text-black-50
+text-white-50
+text-muted
+
+Ссылки:
+link-primary
+link-secondary
+link-success
+link-danger
+link-warning
+link-info
+link-light
+link-dark
+link-body-emphasis
+
+Пример:
+<p class="text-danger">Ошибка</p>
+<a class="link-success" href="#">Успешная ссылка</a>
+
+====================================================================
+9. BACKGROUND — ФОН
+====================================================================
+
+Фон:
+bg-primary
+bg-primary-subtle
+bg-secondary
+bg-secondary-subtle
+bg-success
+bg-success-subtle
+bg-danger
+bg-danger-subtle
+bg-warning
+bg-warning-subtle
+bg-info
+bg-info-subtle
+bg-light
+bg-light-subtle
+bg-dark
+bg-dark-subtle
+bg-body
+bg-body-secondary
+bg-body-tertiary
+bg-black
+bg-white
+bg-transparent
+
+Градиент:
+bg-gradient
+
+Прозрачность фона:
+bg-opacity-10
+bg-opacity-25
+bg-opacity-50
+bg-opacity-75
+bg-opacity-100
+
+Пример:
+<div class="bg-dark text-white p-3">
+  Тёмный блок
+</div>
+
+====================================================================
+10. OPACITY — ПРОЗРАЧНОСТЬ ВСЕГО ЭЛЕМЕНТА
+====================================================================
+
+opacity-0
+opacity-25
+opacity-50
+opacity-75
+opacity-100
+
+Важно:
+opacity влияет на весь элемент: фон, текст, дочерние элементы.
+
+====================================================================
+11. SIZING — ШИРИНА И ВЫСОТА
+====================================================================
+
+Ширина:
+w-25
+w-50
+w-75
+w-100
+w-auto
+
+Высота:
+h-25
+h-50
+h-75
+h-100
+h-auto
+
+Максимумы:
+mw-100
+mh-100
+
+Viewport:
+vw-100
+vh-100
+min-vw-100
+min-vh-100
+
+Пример:
+<div class="w-50">Половина ширины родителя</div>
+
+====================================================================
+12. POSITION — ПОЗИЦИОНИРОВАНИЕ
+====================================================================
+
+Тип позиции:
+position-static
+position-relative
+position-absolute
+position-fixed
+position-sticky
+
+Направления:
+top-0
+top-50
+top-100
+
+bottom-0
+bottom-50
+bottom-100
+
+start-0
+start-50
+start-100
+
+end-0
+end-50
+end-100
+
+Перенос через transform:
+translate-middle
+translate-middle-x
+translate-middle-y
+
+Пример:
+<div class="position-relative">
+  <button class="position-absolute top-0 end-0">X</button>
+</div>
+
+Прилипание:
+sticky-top
+sticky-bottom
+sticky-sm-top
+sticky-md-top
+sticky-lg-top
+sticky-xl-top
+sticky-xxl-top
+
+Фиксация:
+fixed-top
+fixed-bottom
+
+====================================================================
+13. Z-INDEX
+====================================================================
+
+z-n1
+z-0
+z-1
+z-2
+z-3
+
+Пример:
+<div class="position-relative z-1">
+
+====================================================================
+14. BORDERS — РАМКИ
+====================================================================
+
+Добавить рамку:
+border
+border-top
+border-end
+border-bottom
+border-start
+
+Убрать рамку:
+border-0
+border-top-0
+border-end-0
+border-bottom-0
+border-start-0
+
+Цвет рамки:
+border-primary
+border-primary-subtle
+border-secondary
+border-secondary-subtle
+border-success
+border-success-subtle
+border-danger
+border-danger-subtle
+border-warning
+border-warning-subtle
+border-info
+border-info-subtle
+border-light
+border-light-subtle
+border-dark
+border-dark-subtle
+border-black
+border-white
+
+Прозрачность рамки:
+border-opacity-10
+border-opacity-25
+border-opacity-50
+border-opacity-75
+border-opacity-100
+
+Толщина:
+border-1
+border-2
+border-3
+border-4
+border-5
+
+Скругление:
+rounded
+rounded-0
+rounded-1
+rounded-2
+rounded-3
+rounded-4
+rounded-5
+rounded-circle
+rounded-pill
+
+Скругление отдельных сторон:
+rounded-top
+rounded-end
+rounded-bottom
+rounded-start
+
+Адаптивные варианты могут зависеть от сборки Bootstrap; в обычной CDN-сборке основные — как выше.
+
+Пример:
+<div class="border border-danger rounded-3 p-3">
+
+====================================================================
+15. SHADOWS — ТЕНИ
+====================================================================
+
+shadow-none
+shadow-sm
+shadow
+shadow-lg
+
+Пример:
+<div class="card shadow-lg">
+
+====================================================================
+16. OVERFLOW — ПЕРЕПОЛНЕНИЕ
+====================================================================
+
+overflow-auto
+overflow-hidden
+overflow-visible
+overflow-scroll
+
+По осям:
+overflow-x-auto
+overflow-x-hidden
+overflow-x-visible
+overflow-x-scroll
+
+overflow-y-auto
+overflow-y-hidden
+overflow-y-visible
+overflow-y-scroll
+
+Пример:
+<div class="overflow-auto" style="height: 200px">
+
+====================================================================
+17. VISIBILITY — ВИДИМОСТЬ
+====================================================================
+
+visible
+invisible
+
+Важно:
+invisible скрывает элемент, но место под него остаётся.
+d-none скрывает элемент и убирает место.
+
+====================================================================
+18. FLOAT / CLEARFIX
+====================================================================
+
+Float:
+float-start
+float-end
+float-none
+
+Адаптивно:
+float-sm-start
+float-md-end
+float-lg-none
+
+Clearfix:
+clearfix
+
+Пример:
+<div class="clearfix">
+  <img class="float-start" src="...">
+</div>
+
+====================================================================
+19. VERTICAL ALIGN
+====================================================================
+
+Работает только для inline, inline-block, inline-table и table-cell.
+
+align-baseline
+align-top
+align-middle
+align-bottom
+align-text-bottom
+align-text-top
+
+Пример:
+<img class="align-middle" src="...">
+
+====================================================================
+20. INTERACTIONS — ВЗАИМОДЕЙСТВИЯ
+====================================================================
+
+Выделение текста:
+user-select-all
+user-select-auto
+user-select-none
+
+События мыши:
+pe-none
+pe-auto
+
+Пример:
+<a class="pe-none" href="#">Нельзя кликнуть</a>
+
+====================================================================
+21. OBJECT FIT
+====================================================================
+
+Для img/video.
+
+object-fit-contain
+object-fit-cover
+object-fit-fill
+object-fit-scale
+object-fit-none
+
+Адаптивно:
+object-fit-sm-cover
+object-fit-md-cover
+object-fit-lg-cover
+object-fit-xl-cover
+object-fit-xxl-cover
+
+Пример:
+<img class="w-100 object-fit-cover" style="height: 250px">
+
+====================================================================
+22. RATIO — ПРОПОРЦИИ
+====================================================================
+
+ratio
+ratio-1x1
+ratio-4x3
+ratio-16x9
+ratio-21x9
+
+Пример:
+<div class="ratio ratio-16x9">
+  <iframe src="..."></iframe>
+</div>
+
+====================================================================
+23. HELPERS — ПОМОЩНИКИ
+====================================================================
+
+Скрыть визуально, но оставить для screen reader:
+visually-hidden
+
+Скрыть до фокуса:
+visually-hidden-focusable
+
+Растянуть ссылку на весь блок:
+stretched-link
+
+Важно:
+обычно родителю нужен position-relative,
+но card уже имеет position: relative.
+
+Очистка float:
+clearfix
+
+Цветные ссылки:
+link-primary
+link-danger
+и т.д.
+
+====================================================================
+24. THEME / DARK MODE
+====================================================================
+
+Bootstrap 5.3 поддерживает data-bs-theme.
+
+На всю страницу:
+<html data-bs-theme="dark">
+
+На отдельный блок:
+<div data-bs-theme="dark">
+
+Значения:
+light
+dark
+auto — можно делать своей логикой через JS
+
+====================================================================
+25. FORMS — ФОРМЫ
+====================================================================
+
+Обычное поле:
+form-control
+
+Размеры:
+form-control-sm
+form-control-lg
+
+Readonly plain text:
+form-control-plaintext
+
+Файл:
+form-control
+<input type="file" class="form-control">
+
+Label:
+form-label
+
+Подсказка:
+form-text
+
+Select:
+form-select
+form-select-sm
+form-select-lg
+
+Checkbox / radio:
+form-check
+form-check-input
+form-check-label
+
+Inline checkbox/radio:
+form-check-inline
+
+Switch:
+form-switch
+
+Без label слева:
+form-check-reverse
+
+Range:
+form-range
+
+Input group:
+input-group
+input-group-sm
+input-group-lg
+input-group-text
+
+Floating labels:
+form-floating
+
+Валидация:
+is-valid
+is-invalid
+valid-feedback
+invalid-feedback
+valid-tooltip
+invalid-tooltip
+
+Layout:
+row
+col
+col-auto
+form-control
+form-label
+
+Пример правильного поля:
+<div class="mb-3">
+  <label for="email" class="form-label">Email</label>
+  <input id="email" name="email" type="email" class="form-control">
+</div>
+
+Пример checkbox:
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="agree">
+  <label class="form-check-label" for="agree">Согласен</label>
+</div>
+
+====================================================================
+26. BUTTONS — КНОПКИ
+====================================================================
+
+База:
+btn
+
+Цвета:
+btn-primary
+btn-secondary
+btn-success
+btn-danger
+btn-warning
+btn-info
+btn-light
+btn-dark
+btn-link
+
+Контурные:
+btn-outline-primary
+btn-outline-secondary
+btn-outline-success
+btn-outline-danger
+btn-outline-warning
+btn-outline-info
+btn-outline-light
+btn-outline-dark
+
+Размеры:
+btn-sm
+btn-lg
+
+Состояния:
+disabled
+active
+
+Группа:
+btn-group
+btn-group-sm
+btn-group-lg
+btn-group-vertical
+
+Toolbar:
+btn-toolbar
+
+Пример:
+<button class="btn btn-primary btn-lg">Войти</button>
+
+====================================================================
+27. ALERTS — УВЕДОМЛЕНИЯ
+====================================================================
+
+База:
+alert
+
+Варианты:
+alert-primary
+alert-secondary
+alert-success
+alert-danger
+alert-warning
+alert-info
+alert-light
+alert-dark
+
+Ссылка внутри:
+alert-link
+
+Закрываемый alert:
+alert-dismissible
+fade
+show
+btn-close
+data-bs-dismiss="alert"
+
+Пример:
+<div class="alert alert-danger">Ошибка</div>
+
+====================================================================
+28. BADGES — БЕЙДЖИ
+====================================================================
+
+badge
+
+Цвет обычно через bg-*:
+<span class="badge bg-primary">New</span>
+
+Pill:
+rounded-pill
+
+Пример:
+<span class="badge rounded-pill bg-success">В наличии</span>
+
+====================================================================
+29. CARDS — КАРТОЧКИ
+====================================================================
+
+card
+card-body
+card-title
+card-subtitle
+card-text
+card-link
+card-header
+card-footer
+card-img-top
+card-img-bottom
+card-img-overlay
+card-group
+
+Пример:
+<div class="card">
+  <img src="..." class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">Название</h5>
+    <p class="card-text">Описание</p>
+  </div>
+</div>
+
+====================================================================
+30. NAVBAR — ШАПКА САЙТА
+====================================================================
+
+navbar
+navbar-brand
+navbar-nav
+nav-item
+nav-link
+navbar-text
+navbar-toggler
+navbar-toggler-icon
+navbar-collapse
+navbar-expand
+navbar-expand-sm
+navbar-expand-md
+navbar-expand-lg
+navbar-expand-xl
+navbar-expand-xxl
+
+Цвет:
+bg-dark
+bg-light
+navbar-dark — старый привычный подход, в 5.3 лучше data-bs-theme
+data-bs-theme="dark"
+
+Пример:
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Сайт</a>
+  </div>
+</nav>
+
+====================================================================
+31. NAVS / TABS / PILLS
+====================================================================
+
+nav
+nav-item
+nav-link
+nav-tabs
+nav-pills
+nav-fill
+nav-justified
+
+Активный:
+active
+
+Отключённый:
+disabled
+
+Пример:
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Главная</a>
+  </li>
+</ul>
+
+====================================================================
+32. DROPDOWN
+====================================================================
+
+dropdown
+dropdown-center
+dropup
+dropup-center
+dropend
+dropstart
+dropdown-toggle
+dropdown-menu
+dropdown-menu-dark
+dropdown-item
+dropdown-item-text
+dropdown-divider
+dropdown-header
+
+Выравнивание:
+dropdown-menu-start
+dropdown-menu-end
+dropdown-menu-sm-start
+dropdown-menu-sm-end
+dropdown-menu-md-start
+dropdown-menu-md-end
+dropdown-menu-lg-start
+dropdown-menu-lg-end
+dropdown-menu-xl-start
+dropdown-menu-xl-end
+dropdown-menu-xxl-start
+dropdown-menu-xxl-end
+
+Нужен JS Bootstrap.
+
+====================================================================
+33. MODAL
+====================================================================
+
+modal
+modal-dialog
+modal-content
+modal-header
+modal-title
+modal-body
+modal-footer
+
+Размер:
+modal-sm
+modal-lg
+modal-xl
+
+Центр:
+modal-dialog-centered
+
+Скролл внутри:
+modal-dialog-scrollable
+
+Fullscreen:
+modal-fullscreen
+modal-fullscreen-sm-down
+modal-fullscreen-md-down
+modal-fullscreen-lg-down
+modal-fullscreen-xl-down
+modal-fullscreen-xxl-down
+
+Кнопка закрытия:
+btn-close
+data-bs-dismiss="modal"
+
+Нужен JS Bootstrap.
+
+====================================================================
+34. COLLAPSE
+====================================================================
+
+collapse
+show
+collapsing — служебный класс во время анимации
+
+Кнопка:
+data-bs-toggle="collapse"
+data-bs-target="#id"
+
+Пример:
+<button data-bs-toggle="collapse" data-bs-target="#box">Открыть</button>
+<div id="box" class="collapse">Текст</div>
+
+Нужен JS Bootstrap.
+
+====================================================================
+35. ACCORDION
+====================================================================
+
+accordion
+accordion-item
+accordion-header
+accordion-button
+accordion-collapse
+accordion-body
+accordion-flush
+
+Нужен JS Bootstrap.
+
+====================================================================
+36. LIST GROUP
+====================================================================
+
+list-group
+list-group-item
+list-group-item-action
+list-group-flush
+list-group-numbered
+list-group-horizontal
+list-group-horizontal-sm
+list-group-horizontal-md
+list-group-horizontal-lg
+list-group-horizontal-xl
+list-group-horizontal-xxl
+
+Цвета:
+list-group-item-primary
+list-group-item-secondary
+list-group-item-success
+list-group-item-danger
+list-group-item-warning
+list-group-item-info
+list-group-item-light
+list-group-item-dark
+
+Состояния:
+active
+disabled
+
+====================================================================
+37. TABLES
+====================================================================
+
+table
+table-primary
+table-secondary
+table-success
+table-danger
+table-warning
+table-info
+table-light
+table-dark
+
+Оформление:
+table-striped
+table-striped-columns
+table-hover
+table-active
+table-bordered
+table-borderless
+table-sm
+
+Адаптивность:
+table-responsive
+table-responsive-sm
+table-responsive-md
+table-responsive-lg
+table-responsive-xl
+table-responsive-xxl
+
+Выравнивание строк:
+align-middle
+align-bottom
+
+Пример:
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+  </table>
+</div>
+
+====================================================================
+38. IMAGES
+====================================================================
+
+img-fluid = max-width: 100%, height: auto
+img-thumbnail = миниатюра с рамкой
+
+Скругления:
+rounded
+rounded-circle
+rounded-pill
+
+Выравнивание:
+float-start
+float-end
+mx-auto d-block
+
+Пример:
+<img src="..." class="img-fluid rounded">
+
+====================================================================
+39. PROGRESS
+====================================================================
+
+progress
+progress-bar
+progress-bar-striped
+progress-bar-animated
+
+Цвет через bg-*:
+progress-bar bg-success
+
+Пример:
+<div class="progress">
+  <div class="progress-bar" style="width: 50%">50%</div>
+</div>
+
+====================================================================
+40. SPINNERS
+====================================================================
+
+spinner-border
+spinner-border-sm
+spinner-grow
+spinner-grow-sm
+
+Цвет через text-*:
+spinner-border text-primary
+
+Пример:
+<div class="spinner-border text-primary"></div>
+
+====================================================================
+41. PAGINATION
+====================================================================
+
+pagination
+pagination-sm
+pagination-lg
+page-item
+page-link
+active
+disabled
+
+Пример:
+<ul class="pagination">
+  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+</ul>
+
+====================================================================
+42. BREADCRUMB
+====================================================================
+
+breadcrumb
+breadcrumb-item
+active
+
+Пример:
+<nav>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Главная</a></li>
+    <li class="breadcrumb-item active">Каталог</li>
+  </ol>
+</nav>
+
+====================================================================
+43. TOASTS
+====================================================================
+
+toast
+toast-header
+toast-body
+toast-container
+show
+hide
+
+Позиционирование часто через:
+position-fixed
+top-0
+end-0
+p-3
+
+Нужен JS Bootstrap.
+
+====================================================================
+44. TOOLTIP / POPOVER
+====================================================================
+
+Tooltip:
+data-bs-toggle="tooltip"
+data-bs-title="Текст"
+
+Popover:
+data-bs-toggle="popover"
+data-bs-title="Заголовок"
+data-bs-content="Текст"
+
+Нужна JS-инициализация.
+
+====================================================================
+45. OFFCANVAS
+====================================================================
+
+offcanvas
+offcanvas-start
+offcanvas-end
+offcanvas-top
+offcanvas-bottom
+offcanvas-header
+offcanvas-title
+offcanvas-body
+
+Адаптивные:
+offcanvas-sm
+offcanvas-md
+offcanvas-lg
+offcanvas-xl
+offcanvas-xxl
+
+Нужен JS Bootstrap.
+
+====================================================================
+46. CLOSE BUTTON
+====================================================================
+
+btn-close
+btn-close-white
+
+Пример:
+<button type="button" class="btn-close"></button>
+
+====================================================================
+47. PLACEHOLDERS
+====================================================================
+
+placeholder
+placeholder-xs
+placeholder-sm
+placeholder-lg
+placeholder-glow
+placeholder-wave
+
+Ширина:
+col-1 ... col-12
+
+Пример:
+<span class="placeholder col-6"></span>
+
+====================================================================
+48. TEXT / TYPOGRAPHY CONTENT CLASSES
+====================================================================
+
+Заголовки как классы:
+h1 h2 h3 h4 h5 h6
+
+Большие display-заголовки:
+display-1
+display-2
+display-3
+display-4
+display-5
+display-6
+
+Выделенный абзац:
+lead
+
+Списки:
+list-unstyled
+list-inline
+list-inline-item
+
+Цитата:
+blockquote
+blockquote-footer
+
+Аббревиатура:
+initialism
+
+Пример:
+<p class="lead">Крупный вступительный текст</p>
+
+====================================================================
+49. ПОЧЕМУ MX-AUTO НЕ ВСЕГДА ЦЕНТРИРУЕТ
+====================================================================
+
+mx-auto = margin-left: auto; margin-right: auto;
+
+Но auto margin нормально центрирует:
+1) блочный элемент
+2) элемент с шириной
+
+Кнопка обычно inline-block, поэтому:
+<button class="btn btn-primary mx-auto">...</button>
+может не встать по центру.
+
+Варианты:
+<button class="btn btn-primary d-block mx-auto">Войти</button>
+
+Или лучше:
+<div class="text-center">
+  <button class="btn btn-primary">Войти</button>
+</div>
+
+Или flex:
+<div class="d-flex justify-content-center">
+  <button class="btn btn-primary">Войти</button>
+</div>
+
+====================================================================
+50. КАК ПОНЯТЬ, КАКУЮ ЦИФРУ СТАВИТЬ
+====================================================================
+
+Для отступов:
+0 = нет
+1 = мало
+2 = чуть больше
+3 = стандарт
+4 = много
+5 = очень много
+
+Для font-size:
+fs-1 = очень большой
+fs-6 = самый маленький из шкалы fs
+
+Для grid:
+col-12 = вся ширина
+col-6 = половина
+col-4 = треть
+col-3 = четверть
+
+Для opacity:
+opacity-100 = полностью видно
+opacity-50 = полупрозрачный
+opacity-0 = невидимый
+
+Для border:
+border-1 = тонко
+border-5 = толсто
+
+Для rounded:
+rounded-1 = мало
+rounded-5 = сильно
+
+Главное:
+цифра сама по себе ничего не значит.
+Всегда смотри на префикс:
+mt-5, fs-5, col-5, z-3 — это разные системы.
+
+====================================================================
+51. ПРАКТИЧЕСКИЕ ШАБЛОНЫ
+====================================================================
+
+Форма:
+<form class="container col-md-6 mt-5 p-4 bg-light rounded shadow">
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input class="form-control" type="email">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Пароль</label>
+    <input class="form-control" type="password">
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-primary">Войти</button>
+  </div>
+</form>
+
+Карточки каталога:
+<div class="container py-5">
+  <div class="row g-3">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="..." class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Название</h5>
+          <p class="card-text text-muted">Описание</p>
+          <button class="btn btn-primary w-100">Купить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+Шапка:
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Auto Parts</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="menu" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#">Главная</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Каталог</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+====================================================================
+52. ЧТО НУЖНО ПОМНИТЬ
+====================================================================
+
+1. Bootstrap не заменяет CSS полностью.
+2. Bootstrap хорош для быстрой вёрстки.
+3. Если готового класса нет — пиши свой CSS.
+4. Не надо зубрить всё.
+5. Надо понимать систему:
+   префикс + направление + breakpoint + значение.
+
+Примеры разбора:
+mt-md-5:
+m = margin
+t = top
+md = начиная с md
+5 = большой отступ
+
+px-3:
+p = padding
+x = слева и справа
+3 = стандартный отступ
+
+d-lg-flex:
+d = display
+lg = начиная с lg
+flex = display flex
+
+col-md-6:
+col = колонка
+md = начиная с md
+6 = 6 из 12, то есть половина
+
+fs-6:
+fs = font-size
+6 = самый маленький стандартный размер из fs-шкалы
+
+====================================================================
+КОНЕЦ
+====================================================================
